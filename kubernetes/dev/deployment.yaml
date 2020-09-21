@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+	name: demo-student-deployment	
+	labels:
+		app: demo-student
+spec:
+	replicas: 3
+	selector:
+		matchLabels:
+			app: demo-student
+	template:
+		metadata:
+			labels:
+				app: demo-student
+		spec:containers:
+		-	name: demo-student
+			image: demo-student:1.14.2
+			ports:
+			-	containerPort: 80		
+		
+	
+	
