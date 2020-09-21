@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+	name: application-config-demo-student
+	namespace: demo-dev
+	labels:
+		environment: dev
+		app: demo-student
+		tier: backend
+data:
+	application.properties:
+		spring.application.name= demo-student
+		spring.cloud.config.enabled= false
+		spring.cloud.config.fail-fast= false
+		identity.identitiesFile= file:///app/securityidentities/SecurityIndentities.xml
+		http.server.port= 8080
+		server.port= 8443
+		server.ssl.enabled= true
+		server.ssl.key.alias= preprod.key
+		server.ssl.key.store= file:///app/configKey/server-indentification-key-pair.jks
+		server.ssl.key.store-password= ${KEYSTORE_PASSWORD}		

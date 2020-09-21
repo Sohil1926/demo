@@ -1,0 +1,16 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+	name: dev-demo-student
+	namespace: demo-dev
+	labels:
+		app: demo-student
+		environment: dev
+spec:
+	maxReplicas: 2
+	minReplicas: 1
+	scaltargetRef:
+		apiVersion: demo-student/v1
+		kind: Deployment
+		name: dev-demo-student
+	targetCPUUtilizationpercentage: 80

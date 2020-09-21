@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+	labels:
+		environment: dev
+		app: demo-student
+		tier: backend
+	name: dev-demo-student
+	namespace: demo-dev
+spec:
+	type: NodePort
+	selector:
+		app: demo-student
+	ports:
+		name: api
+		port: 8080
+		targetPort: 8080
+		name: sslapi
+		port: 9081
+		targetPort: 8443
+		name: management
+		port: 9080
+		targetPort: 9080
+		

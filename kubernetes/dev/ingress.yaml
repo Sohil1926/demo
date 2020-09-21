@@ -1,0 +1,30 @@
+apiVersion: demo-student/v1
+kind: Ingress
+metadata:
+	annotations:
+		kubernetes.io/ingress.class: ingress-demo-dev
+		nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "false"
+		nginx.ingress.kubernetes.io/auth-tls-secret: demo-dev/pkiv01-rootca
+		nginx.ingress.kubernetes.io/auth-tls-verufy-client: "on"
+		nginx.ingress.kubernetes.io/auth-tls-verify-deplth: "3"
+	labels:
+		app: demo-student
+		environment: dev
+		pki: v01
+		tier: backend
+ 	name: pkiv01-dev-demo-student
+	namespace: demo-dev  
+spec:
+	rules:
+	-	host: pkiv01-dev-demo-student.nonprod-azure.com
+		http:
+			paths:
+		-	backend:
+				serviceName: dev-demo-student
+				servicePort: 8080
+			path: /notvisible/prometheus
+tls:
+-	hosts:
+	-	pkiv01-dev-demo-student.nonprod-azure.com
+	serviceName: pkiv01-demo-noprod-wildcard
+			
